@@ -1,0 +1,406 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+}
+
+body {
+    background-image: url("images/background.jpg");
+    background-color: #000000;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* ==========================================================================
+   1. FULL-WIDTH HEADER (Wallpaper Background + Overlay)
+   ========================================================================== */
+header.site-header {
+    width: 100%;
+    /* Dark gradient overlay + header wallpaper image */
+    background: linear-gradient(rgba(12, 12, 16, 0.75), rgba(12, 12, 16, 0.85)), 
+                url("images/headerwallpaper.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid #ff2a4b;
+    padding: 25px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 10;
+}
+
+.header-profile-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: left;
+}
+
+.profile-avatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ff2a4b;
+    box-shadow: 0 0 18px rgba(255, 42, 75, 0.4);
+    flex-shrink: 0;
+}
+
+.header-text-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-name {
+    font-size: 26px;
+    margin: 0 0 4px 0;
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(255, 42, 75, 0.5);
+    letter-spacing: 1.5px;
+}
+
+.profile-bio {
+    margin: 0;
+    font-size: 13px;
+    color: #ff2a4b;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   2. MAIN LAYOUT & PINNED FULL-HEIGHT LEFT SIDEBAR
+   ========================================================================== */
+.layout-container {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 135px);
+    align-items: stretch;
+}
+
+.side-nav {
+    width: 240px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: rgba(10, 10, 12, 0.95);
+    backdrop-filter: blur(16px);
+    border-right: 2px solid #ff2a4b;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    flex-shrink: 0;
+    z-index: 9;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+}
+
+.nav-item {
+    position: relative;
+    padding: 18px 24px;
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    text-align: left;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-item::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 70%;
+    background: #ff2a4b;
+    box-shadow: 0 0 10px #ff2a4b;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: #ffffff !important;
+    background: rgba(255, 42, 75, 0.15);
+}
+
+.nav-item:hover::after, .nav-item.active::after { width: 4px; }
+
+/* MAIN CONTENT CONTAINER */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+/* Base Container Sections */
+section {
+    margin-bottom: 25px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+section.show { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.box {
+    padding: 30px;
+    background: rgba(20, 20, 25, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    border-left: 4px solid #ff2a4b;             
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    text-align: left;
+}
+
+.box h2 {
+    color: #ff2a4b;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 19px;
+    margin-top: 0;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 42, 75, 0.2);
+    display: inline-block;
+    padding-bottom: 6px;
+}
+
+/* ==========================================================================
+   3. TWEET / POST CARD COMPONENT CLASSES
+   ========================================================================== */
+.tweet-card {
+    background: rgba(22, 22, 28, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 4px solid #ff2a4b;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: left;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tweet-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 42, 75, 0.4);
+}
+
+.tweet-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.tweet-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid #ff2a4b;
+}
+
+.tweet-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.tweet-author {
+    font-weight: bold;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.tweet-handle {
+    font-size: 12px;
+    color: #888899;
+}
+
+.tweet-body {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #dddddd;
+    margin-bottom: 10px;
+}
+
+.tweet-timestamp {
+    font-size: 11px;
+    color: #666677;
+    margin-top: 12px;
+}
+
+/* Image variant */
+.tweet-with-image .tweet-media {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Button variant */
+.tweet-with-button .tweet-action-btn {
+    display: inline-block;
+    background: #ff2a4b;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tweet-with-button .tweet-action-btn:hover {
+    background: #e01f3f;
+    box-shadow: 0 0 12px rgba(255, 42, 75, 0.5);
+}
+
+/* Quote variant */
+.tweet-quote {
+    border-left: 3px solid #ff2a4b;
+    background: rgba(30, 30, 38, 0.6);
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-style: italic;
+    color: #cccccc;
+}
+
+/* Grid variant */
+.tweet-media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tweet-media-grid img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   4. CARDS & HUB
+   ========================================================================== */
+.server-hub { display: flex; flex-direction: column; gap: 12px; margin: 15px 0; }
+
+.server-entry {
+    display: flex;
+    align-items: center;
+    background: rgba(30, 30, 35, 0.7);
+    border-left: 4px solid #ff2a4b; 
+    border-radius: 6px;
+    padding: 14px 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: white;
+}
+
+.server-entry:hover {
+    background: rgba(45, 45, 55, 0.9);
+    transform: translateX(4px);
+}
+
+.server-name {
+    font-weight: 800;
+    font-size: 15px;
+    color: #ff2a4b;
+    min-width: 200px;
+}
+
+.server-brief {
+    flex: 1;
+    font-size: 13px;
+    color: #bbb;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    padding-left: 15px;
+}
+
+/* ==========================================================================
+   5. FULL-WIDTH 4-COLUMN FOOTER & COPYRIGHT
+   ========================================================================== */
+footer.site-footer {
+    width: 100%;
+    background: #0a0a0c;
+    border-top: 2px solid #ff2a4b;
+    padding: 45px 30px 25px 30px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 10;
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    text-align: left;
+}
+
+.footer-box h3 { font-size: 15px; color: #ff2a4b; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+.footer-list { list-style: none; padding: 0; margin: 0; }
+.footer-list li { font-size: 13px; margin-bottom: 8px; color: #cccccc; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px; }
+.footer-list a { color: #cccccc; text-decoration: none; transition: color 0.2s ease; }
+.footer-list a:hover { color: #ff2a4b; }
+
+.footer-msg {
+    font-size: 13px;
+    color: #aaaaaa;
+    line-height: 1.6;
+}
+
+hr { border: none; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 30px auto 20px auto; max-width: 1300px; }
+
+.copyright-text {
+    font-size: 12px;
+    color: #666677;
+    letter-spacing: 0.5px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1024px) {
+    .footer-container { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 850px) {
+    .layout-container { flex-direction: column; }
+    .side-nav {
+        width: 100%;
+        height: auto;
+        position: relative;
+        flex-direction: row;
+        overflow-x: auto;
+        border-right: none;
+        border-bottom: 2px solid #ff2a4b;
+    }
+    .nav-item { padding: 14px 18px; white-space: nowrap; }
+    .main-content { padding: 20px; }
+    .footer-container { grid-template-columns: 1fr; }
+    .server-entry { flex-direction: column; text-align: center; }
+    .server-brief { border-left: none; padding-left: 0; margin-top: 8px; }
+}
