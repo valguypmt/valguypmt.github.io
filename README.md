@@ -1,0 +1,6 @@
+- Pham Minh Thong
+- Vietnamese
+- Can Tho University Student
+- Infomation Security Major
+- Love Tech, SysAdmin, and Other Casual Hobbies
+- Try My Best!!!!!
